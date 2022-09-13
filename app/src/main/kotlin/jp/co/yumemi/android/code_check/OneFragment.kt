@@ -20,25 +20,25 @@ class OneFragment: Fragment(R.layout.fragment_one){
     {
         super.onViewCreated(view, savedInstanceState)
 
-        val _binding= FragmentOneBinding.bind(view)
+        val viewBinding = FragmentOneBinding.bind(view)
 
-        val _viewModel= OneViewModel(context!!)
+        val viewModel = OneViewModel(requireContext())
 
-        val _layoutManager= LinearLayoutManager(context!!)
-        val _dividerItemDecoration=
-            DividerItemDecoration(context!!, _layoutManager.orientation)
-        val _adapter= CustomAdapter(object : CustomAdapter.OnItemClickListener{
+        val layoutManager = LinearLayoutManager(requireContext())
+        val dividerItemDecoration =
+            DividerItemDecoration(requireContext(), layoutManager.orientation)
+        val adapter= CustomAdapter(object : CustomAdapter.OnItemClickListener{
             override fun itemClick(item: item){
                 gotoRepositoryFragment(item)
             }
         })
 
-        _binding.searchInputText
+        viewBinding.searchInputText
             .setOnEditorActionListener{ editText, action, _ ->
                 if (action== EditorInfo.IME_ACTION_SEARCH){
                     editText.text.toString().let {
-                        _viewModel.searchResults(it).apply{
-                            _adapter.submitList(this)
+                        viewModel.searchResults(it).apply{
+                            adapter.submitList(this)
                         }
                     }
                     return@setOnEditorActionListener true
@@ -46,10 +46,10 @@ class OneFragment: Fragment(R.layout.fragment_one){
                 return@setOnEditorActionListener false
             }
 
-        _binding.recyclerView.also{
-            it.layoutManager= _layoutManager
-            it.addItemDecoration(_dividerItemDecoration)
-            it.adapter= _adapter
+        viewBinding.recyclerView.also{
+            it.layoutManager= layoutManager
+            it.addItemDecoration(dividerItemDecoration)
+            it.adapter= adapter
         }
     }
 
