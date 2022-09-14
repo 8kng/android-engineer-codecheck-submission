@@ -12,6 +12,7 @@ import io.ktor.client.engine.android.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import jp.co.yumemi.android.code_check.TopActivity.Companion.lastSearchDate
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
@@ -20,13 +21,14 @@ import org.json.JSONObject
 import java.util.*
 
 /**
- * TwoFragment で使う
- */
+TwoFragment で使う
+ **/
 class OneViewModel(
     val context: Context
 ) : ViewModel() {
 
-    // 検索結果
+    // 検索結果を表示する
+    @DelicateCoroutinesApi
     fun searchResults(inputText: String): List<item> = runBlocking {
         val client = HttpClient(Android)
 
@@ -37,14 +39,11 @@ class OneViewModel(
             }
 
             val jsonBody = JSONObject(response.receive<String>())
-
             val jsonItems = jsonBody.optJSONArray("items")!!
 
             val items = mutableListOf<item>()
 
-            /**
-             * アイテムの個数分ループする
-             */
+            //アイテムの個数分ループする
             for (i in 0 until jsonItems.length()) {
                 val jsonItem = jsonItems.optJSONObject(i)!!
                 val name = jsonItem.optString("full_name")
@@ -52,7 +51,7 @@ class OneViewModel(
                 val language = jsonItem.optString("language")
                 val stargazersCount = jsonItem.optLong("stargazers_count")
                 val watchersCount = jsonItem.optLong("watchers_count")
-                val forksCount = jsonItem.optLong("forks_conut")
+                val forksCount = jsonItem.optLong("forks_count")
                 val openIssuesCount = jsonItem.optLong("open_issues_count")
 
                 items.add(

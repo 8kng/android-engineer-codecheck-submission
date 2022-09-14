@@ -13,9 +13,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.*
 import jp.co.yumemi.android.code_check.databinding.FragmentOneBinding
+import kotlinx.coroutines.DelicateCoroutinesApi
 
 class OneFragment: Fragment(R.layout.fragment_one){
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
         super.onViewCreated(view, savedInstanceState)
@@ -47,13 +49,13 @@ class OneFragment: Fragment(R.layout.fragment_one){
             }
 
         viewBinding.recyclerView.also{
-            it.layoutManager= layoutManager
+            it.layoutManager = layoutManager
             it.addItemDecoration(dividerItemDecoration)
-            it.adapter= adapter
+            it.adapter = adapter
         }
     }
 
-    fun gotoRepositoryFragment(item: item)
+    fun gotoRepositoryFragment(item : item)
     {
         val action= OneFragmentDirections
             .actionRepositoriesFragmentToRepositoryFragment(item = item)
@@ -61,20 +63,20 @@ class OneFragment: Fragment(R.layout.fragment_one){
     }
 }
 
-val diff_util= object: DiffUtil.ItemCallback<item>(){
+val diff_util = object: DiffUtil.ItemCallback<item>(){
     override fun areItemsTheSame(oldItem: item, newItem: item): Boolean
     {
-        return oldItem.name== newItem.name
+        return oldItem.name == newItem.name
     }
 
-    override fun areContentsTheSame(oldItem: item, newItem: item): Boolean
+    override fun areContentsTheSame(oldItem : item, newItem : item): Boolean
     {
-        return oldItem== newItem
+        return oldItem == newItem
     }
 
 }
 
-class CustomAdapter(private val itemClickListener: OnItemClickListener) :
+class CustomAdapter(private val itemClickListener : OnItemClickListener) :
     ListAdapter<item, CustomAdapter.ViewHolder>(diff_util){
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view)
