@@ -27,14 +27,15 @@ class TwoFragment : Fragment(R.layout.fragment_two) {
 
         binding = FragmentTwoBinding.bind(view)
 
-        val item = args.item
+        //リサイクルビューから選択したリポジトリの情報をlayoutに反映する
+        val pickItem = args.item
 
-        rootView.ownerIconView.load(item.ownerIconUrl);
-        rootView.nameView.text = item.name;
-        rootView.languageView.text = item.language;
-        rootView.starsView.text = "${item.stargazersCount} stars";
-        rootView.watchersView.text = "${item.watchersCount} watchers";
-        rootView.forksView.text = "${item.forksCount} forks";
-        rootView.openIssuesView.text = "${item.openIssuesCount} open issues";
+        rootView.ownerIconView.load(pickItem.ownerIconUrl)                        //アイコン表示
+        rootView.nameView.text = pickItem.name                                    //制作者名表示
+        rootView.languageView.text = pickItem.language                            //利用言語表示
+        rootView.starsView.text = "${pickItem.stargazersCount} stars"             //star数表示
+        rootView.watchersView.text = "${pickItem.watchersCount} watchers"         //watcher数表示
+        rootView.forksView.text = "${pickItem.forksCount} forks"                  //fork数表示
+        rootView.openIssuesView.text = "${pickItem.openIssuesCount} open issues"  //open issue数表示
     }
 }
