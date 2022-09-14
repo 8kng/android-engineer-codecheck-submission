@@ -55,9 +55,9 @@ class OneFragment: Fragment(R.layout.fragment_one){
 
     fun gotoRepositoryFragment(item: item)
     {
-        val _action= OneFragmentDirections
-            .actionRepositoriesFragmentToRepositoryFragment(item= item)
-        findNavController().navigate(_action)
+        val action= OneFragmentDirections
+            .actionRepositoriesFragmentToRepositoryFragment(item = item)
+        findNavController().navigate(action)
     }
 }
 
@@ -74,9 +74,8 @@ val diff_util= object: DiffUtil.ItemCallback<item>(){
 
 }
 
-class CustomAdapter(
-    private val itemClickListener: OnItemClickListener,
-) : ListAdapter<item, CustomAdapter.ViewHolder>(diff_util){
+class CustomAdapter(private val itemClickListener: OnItemClickListener) :
+    ListAdapter<item, CustomAdapter.ViewHolder>(diff_util){
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view)
 
@@ -86,19 +85,19 @@ class CustomAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder
     {
-    	val _view= LayoutInflater.from(parent.context)
+    	val rootView = LayoutInflater.from(parent.context)
             .inflate(R.layout.layout_item, parent, false)
-    	return ViewHolder(_view)
+    	return ViewHolder(rootView)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int)
     {
-    	val _item= getItem(position)
+    	val item = getItem(position)
         (holder.itemView.findViewById<View>(R.id.repositoryNameView) as TextView).text=
-            _item.name
+            item.name
 
     	holder.itemView.setOnClickListener{
-     		itemClickListener.itemClick(_item)
+     		itemClickListener.itemClick(item)
     	}
     }
 }

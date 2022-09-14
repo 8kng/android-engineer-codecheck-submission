@@ -27,7 +27,7 @@ class TwoFragment : Fragment(R.layout.fragment_two) {
 
         binding = FragmentTwoBinding.bind(view)
 
-        var item = args.item
+        val item = args.item
 
         rootView.ownerIconView.load(item.ownerIconUrl);
         rootView.nameView.text = item.name;
