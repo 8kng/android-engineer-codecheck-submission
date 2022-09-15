@@ -5,6 +5,7 @@ package jp.co.yumemi.android.code_check
 
 import android.content.Context
 import android.os.Parcelable
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import io.ktor.client.*
 import io.ktor.client.call.*
@@ -33,10 +34,13 @@ class OneViewModel(
         val client = HttpClient(Android)
 
         return@runBlocking GlobalScope.async {
-            val response: HttpResponse = client.get("https://api.github.com/search/repositories") {
-                header("Accept", "application/vnd.github.v3+json")
-                parameter("q", inputText)
-            }
+            Log.d("検索内容", inputText)
+
+            val response: HttpResponse =
+                client.get("https://api.github.com/search/repositories") {
+                    header("Accept", "application/vnd.github.v3+json")
+                    parameter("q", inputText)
+                }
 
             val jsonBody = JSONObject(response.receive<String>())
             val jsonItems = jsonBody.optJSONArray("items")!!
@@ -66,7 +70,6 @@ class OneViewModel(
                     )
                 )
             }
-
             lastSearchDate = Date()
 
             return@async items.toList()

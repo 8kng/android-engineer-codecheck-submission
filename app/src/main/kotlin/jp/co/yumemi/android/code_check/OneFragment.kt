@@ -3,11 +3,14 @@
  */
 package jp.co.yumemi.android.code_check
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -35,19 +38,28 @@ class OneFragment: Fragment(R.layout.fragment_one){
             }
         })
 
+        //入力された文字の検索処理
         viewBinding.searchInputText
-            .setOnEditorActionListener{ editText, action, _ ->
-                if (action== EditorInfo.IME_ACTION_SEARCH){
+            .setOnEditorActionListener { editText, action, _ ->
+                if (action == EditorInfo.IME_ACTION_SEARCH) {
                     editText.text.toString().let {
-                        viewModel.searchResults(it).apply{
-                            adapter.submitList(this)
+                        if (editText.text.isNotEmpty()) {  //検索時入力内容がある場合検索処理を実行させる
+                            Log.d("検索内容あり", editText.text.toString())
+                            viewModel.searchResults(it).apply {
+                                adapter.submitList(this)
+                            }
                         }
                     }
+                    //キーボードを隠す
+                    val inputManager = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    inputManager.hideSoftInputFromWindow(view.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+
                     return@setOnEditorActionListener true
                 }
                 return@setOnEditorActionListener false
             }
 
+        //リサイクルビューの設定
         viewBinding.recyclerView.also{
             it.layoutManager = layoutManager
             it.addItemDecoration(dividerItemDecoration)
