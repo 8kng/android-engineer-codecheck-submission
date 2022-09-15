@@ -17,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.*
 import jp.co.yumemi.android.code_check.databinding.FragmentOneBinding
 import kotlinx.coroutines.DelicateCoroutinesApi
+import java.io.IOException
 
 class OneFragment: Fragment(R.layout.fragment_one){
 
@@ -43,11 +44,17 @@ class OneFragment: Fragment(R.layout.fragment_one){
             .setOnEditorActionListener { editText, action, _ ->
                 if (action == EditorInfo.IME_ACTION_SEARCH) {
                     editText.text.toString().let {
-                        if (editText.text.isNotEmpty()) {  //検索時入力内容がある場合検索処理を実行させる
-                            Log.d("検索内容あり", editText.text.toString())
-                            viewModel.searchResults(it).apply {
-                                adapter.submitList(this)
+
+                        if (editText.text.isNotEmpty()) {
+                            try {
+                                viewModel.searchResults(it).apply {
+                                    adapter.submitList(this)
+                                }
+                            } catch (e: IOException) {
+                                Log.d("ネットワークエラー", "オフラインになっている")
                             }
+                        } else {
+                            Log.d("入力エラー", "入力されていない")
                         }
                     }
                     //キーボードを隠す

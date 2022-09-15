@@ -36,6 +36,7 @@ class OneViewModel(
         return@runBlocking GlobalScope.async {
             Log.d("検索内容", inputText)
 
+            //Git HubにHTTP通信
             val response: HttpResponse =
                 client.get("https://api.github.com/search/repositories") {
                     header("Accept", "application/vnd.github.v3+json")
