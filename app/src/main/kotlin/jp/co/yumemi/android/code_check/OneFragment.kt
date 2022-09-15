@@ -5,13 +5,13 @@ package jp.co.yumemi.android.code_check
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.*
@@ -45,18 +45,20 @@ class OneFragment: Fragment(R.layout.fragment_one){
                 if (action == EditorInfo.IME_ACTION_SEARCH) {
                     editText.text.toString().let {
 
-                        if (editText.text.isNotEmpty()) {
+                        if (editText.text.isNotEmpty()) {  //editTextに文字が入力されている場合
                             try {
                                 viewModel.searchResults(it).apply {
                                     adapter.submitList(this)
                                 }
-                            } catch (e: IOException) {
-                                Log.d("ネットワークエラー", "オフラインになっている")
+                            } catch (e: IOException) {  //オフライン時の時の例外処理
+                                print(e)
+                                Toast.makeText(activity,"オフラインになっています", Toast.LENGTH_SHORT).show()
                             }
-                        } else {
-                            Log.d("入力エラー", "入力されていない")
+                        } else {  //editTextに文字が入力されている場合
+                            Toast.makeText(activity,"入力されていないです", Toast.LENGTH_SHORT).show()
                         }
                     }
+
                     //キーボードを隠す
                     val inputManager = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                     inputManager.hideSoftInputFromWindow(view.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
