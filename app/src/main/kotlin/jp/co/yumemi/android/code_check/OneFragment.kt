@@ -27,7 +27,6 @@ class OneFragment: Fragment(R.layout.fragment_one){
         super.onViewCreated(view, savedInstanceState)
 
         val viewBinding = FragmentOneBinding.bind(view)
-
         val viewModel = OneViewModel(requireContext())
 
         val layoutManager = LinearLayoutManager(requireContext())
