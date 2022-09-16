@@ -5,7 +5,6 @@ package jp.co.yumemi.android.code_check
 
 import android.content.Context
 import android.os.Parcelable
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import io.ktor.client.*
 import io.ktor.client.call.*
@@ -13,11 +12,11 @@ import io.ktor.client.engine.android.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import jp.co.yumemi.android.code_check.TopActivity.Companion.lastSearchDate
+import kotlinx.android.parcel.Parcelize
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
-import kotlinx.parcelize.Parcelize
 import org.json.JSONObject
 import java.util.*
 
@@ -34,7 +33,6 @@ class OneViewModel(
         val client = HttpClient(Android)
 
         return@runBlocking GlobalScope.async {
-            Log.d("検索内容", inputText)
 
             //Git HubにHTTP通信
             val response: HttpResponse =

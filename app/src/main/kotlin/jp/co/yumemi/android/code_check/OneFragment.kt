@@ -41,7 +41,7 @@ class OneFragment: Fragment(R.layout.fragment_one){
         //入力された文字の検索処理
         viewBinding.searchInputText
             .setOnEditorActionListener { editText, action, _ ->
-                if (action == EditorInfo.IME_ACTION_SEARCH) {
+                if (action == EditorInfo.IME_ACTION_SEARCH) {  //キーボードの検索ボタンを押したときの処理
                     editText.text.toString().let {
 
                         if (editText.text.isNotEmpty()) {  //editTextに文字が入力されている場合
@@ -77,7 +77,7 @@ class OneFragment: Fragment(R.layout.fragment_one){
 
     fun gotoRepositoryFragment(item : item)
     {
-        val action= OneFragmentDirections
+        val action = OneFragmentDirections
             .actionRepositoriesFragmentToRepositoryFragment(item = item)
         findNavController().navigate(action)
     }
