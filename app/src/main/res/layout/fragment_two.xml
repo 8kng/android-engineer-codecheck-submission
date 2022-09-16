@@ -8,11 +8,12 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ownerIconView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="200sp"
+        android:layout_height="200sp"
         android:layout_margin="16dp"
         android:contentDescription="@null"
         android:src="@drawable/jetbrains"
+        app:layout_constraintBottom_toTopOf="@+id/nameView"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,13 +24,14 @@
         android:id="@+id/nameView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="116dp"
         android:text="JetBrains/kotlin"
         android:textColor="@color/black"
-        android:textSize="35sp"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@+id/languageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ownerIconView" />
+        app:layout_constraintTop_toBottomOf="@+id/ownerIconView" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/centerGuid"
@@ -40,16 +42,17 @@
 
     <TextView
         android:id="@+id/languageView"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="10dp"
         android:text="Written in Kotlin"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/starsView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nameView"
+        app:layout_constraintTop_toBottomOf="@id/ownerIconView"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -57,17 +60,16 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="150dp"
+        android:background="@color/Yellow_700"
         android:text="38530 stars"
         android:textAlignment="textEnd"
         android:textColor="@color/white"
         android:textSize="18sp"
-        android:background = "@color/Yellow_700"
         app:layout_constraintBottom_toTopOf="@+id/watchersView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="@id/centerGuid"
-        app:layout_constraintTop_toBottomOf="@id/nameView" />
+        app:layout_constraintTop_toBottomOf="@+id/languageView" />
 
     <TextView
         android:id="@+id/watchersView"
