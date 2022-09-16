@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background = "@color/Yellow_200">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ownerIconView"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -22,10 +23,10 @@
         android:id="@+id/nameView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:text="JetBrains/kotlin"
         android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ownerIconView" />
@@ -35,17 +36,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
+        app:layout_constraintGuide_percent="0.42" />
 
     <TextView
         android:id="@+id/languageView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="30dp"
         android:text="Written in Kotlin"
         android:textColor="@color/black"
-        android:textSize="14sp"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/nameView"
         tools:ignore="MissingConstraints" />
 
@@ -54,12 +57,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="150dp"
         android:text="38530 stars"
         android:textAlignment="textEnd"
-        android:textColor="@color/black"
-        android:textSize="12sp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:background = "@color/Yellow_700"
+        app:layout_constraintBottom_toTopOf="@+id/watchersView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="@id/centerGuid"
         app:layout_constraintTop_toBottomOf="@id/nameView" />
 
@@ -68,12 +74,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="15dp"
         android:text="38530 watchers"
         android:textAlignment="textEnd"
-        android:textColor="@color/black"
-        android:textSize="12sp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:background = "@color/Yellow_700"
+        app:layout_constraintBottom_toTopOf="@+id/forksView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="@id/centerGuid"
         app:layout_constraintTop_toBottomOf="@id/starsView" />
 
@@ -82,13 +91,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/Yellow_700"
         android:text="4675 forks"
         android:textAlignment="textEnd"
-        android:textColor="@color/black"
-        android:textSize="12sp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/openIssuesView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="@id/centerGuid"
+        app:layout_constraintStart_toStartOf="@+id/centerGuid"
         app:layout_constraintTop_toBottomOf="@id/watchersView" />
 
     <TextView
@@ -96,13 +107,57 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="20dp"
         android:text="131 open issues"
         android:textAlignment="textEnd"
-        android:textColor="@color/black"
-        android:textSize="12sp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:background = "@color/Yellow_700"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="@id/centerGuid"
         app:layout_constraintTop_toBottomOf="@id/forksView" />
+
+    <ImageView
+        android:id="@+id/starIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintEnd_toStartOf="@+id/starsView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/starsView"
+        app:srcCompat="@drawable/star_icon" />
+
+    <ImageView
+        android:id="@+id/watchIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintEnd_toStartOf="@+id/watchersView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/watchersView"
+        app:srcCompat="@drawable/watching_icon" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintEnd_toStartOf="@+id/openIssuesView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/openIssuesView"
+        app:srcCompat="@drawable/issue_icon" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintEnd_toStartOf="@+id/watchersView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/forksView"
+        app:srcCompat="@drawable/fork_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
